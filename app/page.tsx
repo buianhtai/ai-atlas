@@ -1,73 +1,104 @@
 import Link from "next/link";
 import { Nav } from "@/components/Nav";
 import { ConceptWorld } from "@/components/ConceptWorld";
-import { AtlasBadge, AtlasEyebrow } from "@/components/AtlasUI";
 import { concepts } from "@/lib/concepts";
 
-const categoryOrder = ["Foundations", "Knowledge", "Connections", "Agents", "Agent Systems", "Engineering"];
+const categoryOrder = [
+  { name: "Foundations", note: "LLMs, tokens, context" },
+  { name: "Knowledge", note: "RAG, embeddings, graphs" },
+  { name: "Connections", note: "Tools, function calling, MCP" },
+  { name: "Agents", note: "Planning, memory, action" },
+  { name: "Agent Systems", note: "Multi-agent orchestration" },
+  { name: "Engineering", note: "Evals, safety, observability" },
+];
+
+function ConceptSketch({ index }: { index: number }) {
+  const variant = index % 3;
+  return (
+    <div className={`conceptSketch conceptSketch--${variant}`} aria-hidden="true">
+      <div className="sketchNode sketchNode--a" />
+      <div className="sketchNode sketchNode--b" />
+      <div className="sketchNode sketchNode--c" />
+      <div className="sketchLine sketchLine--a" />
+      <div className="sketchLine sketchLine--b" />
+    </div>
+  );
+}
 
 export default function Home() {
   return (
     <>
       <Nav />
-      <main>
-        <section className="atlasHero container">
-          <div className="atlasHeroCopy">
-            <AtlasBadge>Interactive AI learning atlas</AtlasBadge>
-            <AtlasEyebrow>See the system before memorizing the term</AtlasEyebrow>
-            <h1>Understand modern AI through <span>visual missions.</span></h1>
-            <p>AI Atlas turns abstract concepts into explorable scenes, guided interactions, and architecture reveals—so you understand why a technology exists before learning its vocabulary.</p>
-            <div className="atlasHeroActions">
-              <Link className="atlasButton" href="/learn/mcp">Start with MCP</Link>
-              <a className="atlasButton atlasButton--secondary" href="#concepts">Explore the atlas</a>
-            </div>
-            <div className="atlasProofRow">
-              <div><strong>01</strong><span>See the problem</span></div>
-              <div><strong>02</strong><span>Interact with it</span></div>
-              <div><strong>03</strong><span>Reveal the architecture</span></div>
+      <main className="atlasHome">
+        <section className="editorialHero container">
+          <div className="editorialHeroCopy">
+            <div className="editorialKicker">AI concepts, explained visually</div>
+            <h1>Understand the systems behind modern AI.</h1>
+            <p>Explore visual stories, interactive missions, and real architecture diagrams that make complex AI concepts easier to remember and apply.</p>
+            <div className="editorialActions">
+              <Link className="editorialPrimary" href="/learn/mcp">Start with MCP</Link>
+              <a className="editorialSecondary" href="#catalog">Browse the catalog</a>
             </div>
           </div>
-          <div className="atlasHeroWorld">
+
+          <div className="editorialHeroIllustration">
+            <div className="editorialIllustrationTitle">The AI systems map</div>
             <ConceptWorld />
+            <div className="editorialIllustrationCaption">A visual atlas of how models, knowledge, tools, and agents connect.</div>
           </div>
         </section>
 
-        <section className="atlasBand">
-          <div className="container">
-            <div className="atlasBandLabel">Learning worlds</div>
-            <div className="atlasCategoryRail">
-              {categoryOrder.map((category, index) => (
-                <div className="atlasCategory" key={category}>
-                  <span>{String(index + 1).padStart(2, "0")}</span>
-                  <strong>{category}</strong>
-                </div>
-              ))}
-            </div>
+        <section className="editorialIntro container">
+          <div className="editorialIntroCard">
+            <span className="editorialNumber">01</span>
+            <h2>See the problem first.</h2>
+            <p>Start with the situation a technology was invented to solve.</p>
+          </div>
+          <div className="editorialIntroCard">
+            <span className="editorialNumber">02</span>
+            <h2>Interact with the idea.</h2>
+            <p>Use a visual mission to build the mental model yourself.</p>
+          </div>
+          <div className="editorialIntroCard">
+            <span className="editorialNumber">03</span>
+            <h2>Reveal the architecture.</h2>
+            <p>Map the metaphor directly to the real engineering system.</p>
           </div>
         </section>
 
-        <section className="container atlasConceptSection" id="concepts">
-          <div className="atlasSectionHead">
+        <section className="editorialCatalog container" id="catalog">
+          <div className="editorialSectionTitle">
             <div>
-              <AtlasEyebrow>Explore concepts</AtlasEyebrow>
-              <h2>Build the mental model one system at a time.</h2>
+              <span>Catalog</span>
+              <h2>Choose a learning world.</h2>
             </div>
-            <p>Each lesson starts with a visual metaphor, moves through an interactive mission, and ends with the real engineering model.</p>
+            <p>Concepts are grouped by the role they play in an AI system, not by buzzword popularity.</p>
           </div>
-          <div className="atlasConceptGrid">
+
+          <div className="editorialCategories">
+            {categoryOrder.map((category, index) => (
+              <div className="editorialCategory" key={category.name}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <strong>{category.name}</strong>
+                <small>{category.note}</small>
+              </div>
+            ))}
+          </div>
+
+          <div className="editorialConceptGrid" id="concepts">
             {concepts.map((concept, index) => (
-              <Link href={`/learn/${concept.slug}`} className="atlasConceptCard" key={concept.slug}>
-                <div className="atlasConceptIndex">{String(index + 1).padStart(2, "0")}</div>
-                <div className="atlasConceptMeta">{concept.category}</div>
+              <Link href={`/learn/${concept.slug}`} className="editorialConceptCard" key={concept.slug}>
+                <ConceptSketch index={index} />
+                <div className="editorialConceptMeta">{concept.category}</div>
                 <h3>{concept.name}</h3>
                 <p>{concept.simple}</p>
-                <span className="atlasConceptAction">Open lesson <b>↗</b></span>
+                <span className="editorialConceptLink">Explore concept →</span>
               </Link>
             ))}
           </div>
         </section>
       </main>
-      <footer className="atlasFooter"><div className="container">AI Atlas · Learn complex AI systems by seeing how they work.</div></footer>
+      <footer className="editorialFooter"><div className="container">AI Atlas · Visual learning for modern AI systems.</div></footer>
     </>
   );
 }
