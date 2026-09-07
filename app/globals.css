@@ -178,3 +178,20 @@ footer { border-top:1px solid var(--line); color:var(--muted); padding:28px 0 50
   .storySteps { grid-template-columns:1fr; }
   .lessonWorldShell { height:350px; }
 }
+
+.novaMission{overflow:hidden;border:1px solid rgba(145,190,222,.2);border-radius:30px;background:linear-gradient(180deg,#0b192b,#08121f);box-shadow:0 35px 90px rgba(0,0,0,.32)}
+.novaTopbar{height:52px;padding:0 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.08);font-size:.69rem;font-weight:800;letter-spacing:.1em;color:#819bb3}
+.novaStatus{color:#b9d0e4}.novaStatus i,.novaLoading i{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:8px;background:#6ce6aa;box-shadow:0 0 12px #6ce6aa}
+.novaScene{height:500px;background:radial-gradient(circle at 50% 25%,rgba(74,190,230,.18),transparent 32%),linear-gradient(#0d1e34,#08121f)}
+.novaPanel{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;padding:28px 30px;border-top:1px solid rgba(255,255,255,.08);background:rgba(8,18,31,.88)}
+.novaPanel h2{font-size:1.65rem;letter-spacing:-.035em;margin:7px 0 8px}.novaPanel p{max-width:720px;margin:0;color:#8fa6bb;line-height:1.6}
+.novaStep{font-size:.69rem;font-weight:900;letter-spacing:.12em;color:#64e7f6}
+.novaActions{min-width:180px;text-align:right}.novaInstruction{display:block;max-width:210px;color:#9cb1c4;font-size:.78rem;line-height:1.45}
+.novaPrimary{border:0;border-radius:13px;padding:12px 16px;background:#edf7ff;color:#091522;font-weight:900;cursor:pointer;box-shadow:0 8px 30px rgba(133,224,255,.12)}
+.novaLoading{font-size:.78rem;font-weight:800;color:#b7c9d8}.novaLoading i{background:#65e7f7;box-shadow:0 0 12px #65e7f7;animation:novaPulse .8s infinite alternate}
+@keyframes novaPulse{to{opacity:.25}}
+.novaStation{width:130px;border:0;background:transparent;color:#0d1b2c;text-align:center;cursor:pointer}.novaStation strong,.novaStation span{display:block}.novaStation strong{font-size:.9rem}.novaStation span{font-size:.55rem;margin-top:2px;opacity:.65}.novaStation.active strong{color:#07111f}
+.novaHubLabel{text-align:center;color:#d9f8ff}.novaHubLabel small,.novaHubLabel strong{display:block}.novaHubLabel small{font-size:.42rem;letter-spacing:.13em;color:#76a6bc}.novaHubLabel strong{font-size:1.1rem;letter-spacing:.05em}
+.novaReveal{display:flex;gap:16px;align-items:center;padding:16px 30px;border-top:1px solid rgba(255,255,255,.07);font-size:.78rem;color:#8ea5b8}.novaReveal span{flex:none;color:#67e6f6;font-weight:900}.novaReveal strong{font-weight:650;color:#b9cbd9}
+.lessonHero:has(+ .novaMission){grid-template-columns:1fr}.lessonHero:has(+ .novaMission) h1{font-size:clamp(3.4rem,7vw,6rem)}
+@media(max-width:700px){.novaScene{height:400px}.novaPanel{grid-template-columns:1fr;padding:22px}.novaActions{text-align:left}.novaReveal{align-items:flex-start;flex-direction:column;padding:16px 22px}}
