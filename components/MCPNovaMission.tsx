@@ -1,6 +1,6 @@
 "use client";
 
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Float, Html, RoundedBox } from "@react-three/drei";
 import { useMemo, useRef, useState } from "react";
 import * as THREE from "three";
@@ -14,6 +14,38 @@ const stations = [
   { id:"drive" as const, name:"Drive", subtitle:"Documents & knowledge", x:0, color:"#74ddb0" },
   { id:"database" as const, name:"Database", subtitle:"Structured data", x:3.1, color:"#f1c866" }
 ];
+
+function CameraDirector({ phase, selected, compact, tablet }: { phase: Phase; selected: StationId | null; compact: boolean; tablet: boolean }) {
+  const { camera } = useThree();
+  const target = useMemo(() => new THREE.Vector3(), []);
+  const desired = useMemo(() => new THREE.Vector3(), []);
+
+  useFrame(() => {
+    const selectedStation = stations.find((item) => item.id === selected);
+    const selectedX = selectedStation ? (compact ? (selectedStation.id === "github" ? -2.25 : selectedStation.id === "database" ? 2.25 : 0) : selectedStation.x) : 0;
+
+    if (phase === "briefing") {
+      desired.set(0, compact ? 1.15 : 1.35, compact ? 7.1 : tablet ? 7.5 : 7.2);
+      target.set(0, compact ? .7 : .85, 0);
+    } else if (phase === "choose") {
+      desired.set(selectedX * .42, compact ? .35 : .45, compact ? 7.7 : 7.35);
+      target.set(selectedX * .5, -.3, 0);
+    } else if (phase === "request") {
+      desired.set(selectedX * .18, .1, compact ? 8.15 : 7.8);
+      target.set(selectedX * .3, -.35, 0);
+    } else {
+      desired.set(0, compact ? .25 : .3, compact ? 8.7 : 8.2);
+      target.set(0, 0, 0);
+    }
+
+    camera.position.lerp(desired, .045);
+    const currentLook = new THREE.Vector3(0, 0, -1).applyQuaternion(camera.quaternion).add(camera.position);
+    currentLook.lerp(target, .06);
+    camera.lookAt(currentLook);
+  });
+
+  return null;
+}
 
 function Packet({from,to,reverse=false}:{from:[number,number,number];to:[number,number,number];reverse?:boolean}) {
   const ref=useRef<THREE.Mesh>(null);
@@ -86,7 +118,7 @@ export function MCPNovaMission() {
 
   return <section className="novaMission">
     <div className="novaTopbar"><span className="novaStatus"><i/> NOVA TRAINING SIMULATION</span><span>MISSION 01 · MCP</span></div>
-    <div className="novaScene"><Canvas camera={{position:[0,.25,cameraZ],fov:compact ? 48 : 42}} dpr={dpr}><Scene compact={compact} selected={selected} phase={phase} onSelect={choose}/></Canvas></div>
+    <div className="novaScene"><Canvas camera={{position:[0,.25,cameraZ],fov:compact ? 48 : 42}} dpr={dpr}><CameraDirector phase={phase} selected={selected} compact={compact} tablet={tablet}/><Scene compact={compact} selected={selected} phase={phase} onSelect={choose}/></Canvas></div>
     <div className="novaPanel">
       <div>
         <span className="novaStep">{phase==="result"?"MISSION COMPLETE":"YOUR MISSION"}</span>
