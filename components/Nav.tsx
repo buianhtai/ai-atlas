@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { NovaMascot } from "@/components/NovaMascot";
 
 const groups = [
@@ -10,10 +13,15 @@ const groups = [
 ];
 
 export function Nav() {
+  const pathname = usePathname();
+  const isCurrent = (href: string) => href.startsWith("/#") ? false : pathname === href;
+
   return (
     <>
+      <a className="skipLink" href="#main-content">Skip to content</a>
+
       <aside className="atlasSidebar">
-        <Link href="/" className="sidebarBrand">
+        <Link href="/" className="sidebarBrand" aria-label="AI Atlas home">
           <NovaMascot className="novaMark" pose="guide" />
           <div><strong>AI ATLAS</strong><span>Visual guide to modern AI</span></div>
         </Link>
@@ -26,7 +34,14 @@ export function Nav() {
           {groups.map((group) => (
             <div className="sidebarGroup" key={group.label}>
               <span>{group.label}</span>
-              {group.links.map((link) => <Link key={link.href} href={link.href}>{link.text}</Link>)}
+              {group.links.map((link) => {
+                const current = isCurrent(link.href);
+                return (
+                  <Link key={link.href} href={link.href} className={current ? "active" : undefined} aria-current={current ? "page" : undefined}>
+                    {link.text}
+                  </Link>
+                );
+              })}
             </div>
           ))}
         </nav>
@@ -35,8 +50,11 @@ export function Nav() {
       </aside>
 
       <header className="atlasMobileNav">
-        <Link href="/" className="mobileBrand"><span className="mobileBrandMark">N</span><strong>AI Atlas</strong></Link>
-        <nav><Link href="/#concepts">Catalog</Link><Link href="/learn/mcp">MCP</Link></nav>
+        <Link href="/" className="mobileBrand" aria-label="AI Atlas home"><span className="mobileBrandMark">N</span><strong>AI Atlas</strong></Link>
+        <nav aria-label="Mobile navigation">
+          <Link href="/#concepts">Catalog</Link>
+          <Link href="/learn/mcp" className={pathname === "/learn/mcp" ? "active" : undefined} aria-current={pathname === "/learn/mcp" ? "page" : undefined}>MCP</Link>
+        </nav>
       </header>
     </>
   );
