@@ -1,14 +1,31 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Nav } from "@/components/Nav";
 import { NovaMascot } from "@/components/NovaMascot";
 import { ConceptIllustration } from "@/components/ConceptIllustration";
-import { MCPNovaMission } from "@/components/MCPNovaMission";
+import { MCPMissionLazy } from "@/components/MCPMissionLazy";
 import { concepts, getConcept } from "@/lib/concepts";
 import { lessonDetails } from "@/lib/lessonDetails";
 
 export function generateStaticParams() {
   return concepts.map((concept) => ({ slug: concept.slug }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const concept = getConcept(slug);
+  if (!concept) return {};
+
+  return {
+    title: `${concept.name} — AI Atlas`,
+    description: concept.simple,
+    openGraph: {
+      title: `${concept.name} — AI Atlas`,
+      description: concept.simple,
+      type: "article",
+    },
+  };
 }
 
 export default async function LessonPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -21,11 +38,12 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
   const previous = index > 0 ? concepts[index - 1] : null;
   const next = index < concepts.length - 1 ? concepts[index + 1] : null;
   const related = concepts.filter((item) => concept.related.some((name) => name.toLowerCase().includes(item.name.toLowerCase()) || item.name.toLowerCase().includes(name.toLowerCase()))).slice(0, 3);
+  const progress = `${Math.round(((index + 1) / concepts.length) * 100)}%`;
 
   return (
     <>
       <Nav />
-      <main className="lessonEditorial">
+      <main className="lessonEditorial" id="main-content">
         <div className="container lessonEditorialLayout">
           <aside className="lessonCatalog" aria-label="AI concept catalog">
             <div className="lessonCatalogTitle">AI concepts</div>
@@ -38,6 +56,12 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
           </aside>
 
           <article className="lessonArticle">
+            <div className="lessonProgress" aria-label={`Concept ${index + 1} of ${concepts.length}`}>
+              <span>{String(index + 1).padStart(2, "0")} / {String(concepts.length).padStart(2, "0")}</span>
+              <div aria-hidden="true"><i style={{ width: progress }} /></div>
+              <small>{concept.category}</small>
+            </div>
+
             <header className="lessonEditorialHero">
               <div className="lessonHeroCopy">
                 <div className="lessonBreadcrumb"><Link href="/">AI Atlas</Link><span>/</span>{concept.category}</div>
@@ -63,7 +87,7 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
                   <h2>Connect Nova to the outside world.</h2>
                   <p>Experience the integration problem before reading the protocol vocabulary.</p>
                 </div>
-                <MCPNovaMission />
+                <MCPMissionLazy />
               </section>
             )}
 
