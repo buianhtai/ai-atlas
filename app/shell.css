@@ -1,0 +1,50 @@
+/* Strong visual shell inspired by illustrated programming handbooks, using original AI Atlas art. */
+:root{
+  --rail:#de584b;
+  --rail-dark:#b94238;
+  --rail-ink:#6f241f;
+  --paper:#fffdfa;
+  --canvas:#f3f1ed;
+  --ink:#353433;
+  --muted:#77736f;
+  --line:#ddd9d4;
+  --soft:#f7eee9;
+  --teal:#6d9e98;
+  --gold:#d7ae58;
+}
+
+.atlasSidebar{
+  position:fixed;inset:0 auto 0 0;z-index:60;width:236px;
+  display:flex;flex-direction:column;padding:22px 18px 18px;
+  color:#fff;background:linear-gradient(180deg,#e45f52 0%,#d84e43 56%,#c94239 100%);
+  box-shadow:8px 0 26px rgba(89,43,34,.08);
+}
+.sidebarBrand{display:flex;gap:12px;align-items:center;color:white}.novaMark{width:72px;height:72px;color:#5f302d;flex:none;filter:drop-shadow(0 6px 0 rgba(111,36,31,.12))}.sidebarBrand>div{display:grid;gap:2px}.sidebarBrand strong{font-size:1.08rem;letter-spacing:.03em}.sidebarBrand span{font-size:.62rem;line-height:1.25;color:#ffe6df}.sidebarRule{height:1px;background:rgba(255,255,255,.25);margin:18px 0 14px}.sidebarIntro{font-size:.72rem;line-height:1.5;color:#ffe5df;padding:0 4px 14px}.sidebarNav{display:grid;gap:13px;overflow-y:auto;padding-right:2px}.sidebarGroup{display:grid}.sidebarGroup>span{padding:0 8px 5px;font-size:.6rem;font-weight:800;letter-spacing:.11em;text-transform:uppercase;color:#ffc9bf}.sidebarGroup a{position:relative;padding:8px 10px;border-radius:3px;color:#fff1ed;font-size:.78rem;font-weight:700}.sidebarGroup a:hover{background:rgba(101,23,18,.16);color:white}.sidebarGroup a::before{content:'›';position:absolute;right:9px;opacity:.45}.sidebarFooter{margin-top:auto;padding:14px 8px 2px;border-top:1px solid rgba(255,255,255,.2);font-size:.62rem;color:#ffd7d0;text-transform:uppercase;letter-spacing:.08em}
+
+.atlasMobileNav{display:none;position:sticky;top:0;z-index:70;height:62px;padding:0 16px;align-items:center;justify-content:space-between;background:#de584b;color:#fff;box-shadow:0 2px 12px rgba(80,40,30,.12)}.mobileBrand{display:flex;align-items:center;gap:9px}.mobileBrandMark{width:28px;height:28px;display:grid;place-items:center;border-radius:50%;background:#fff;color:#d84e43;font-weight:900}.atlasMobileNav nav{display:flex;gap:14px;font-size:.76rem;font-weight:800}
+
+.atlasHome,.lessonEditorial,.editorialFooter{margin-left:236px}
+.atlasHome,.lessonEditorial{background:var(--paper)!important}
+.editorialFooter{background:var(--paper)!important}
+body:has(.atlasSidebar){background:var(--canvas)!important;color:var(--ink)!important}
+body:has(.atlasSidebar)>.atlasNavWrap{display:none!important}
+
+/* Home becomes a clean handbook canvas rather than a magazine spread. */
+.atlasHome .container,.lessonEditorial .container{width:min(1120px,calc(100% - 44px))}
+.editorialHero{padding:48px 0 44px!important;grid-template-columns:.9fr 1.1fr!important;gap:40px!important}.editorialKicker{color:#c94c42!important}.editorialHero h1{font-family:Inter,ui-sans-serif,system-ui,sans-serif!important;font-weight:900!important;font-size:clamp(3.5rem,6vw,5.9rem)!important;line-height:.93!important;letter-spacing:-.065em!important}.editorialHero p{font-size:1rem!important}.editorialPrimary{background:#db564a!important;border-radius:3px!important}.editorialSecondary{border-radius:3px!important;background:white!important}.editorialHeroIllustration{padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important}.editorialIllustrationTitle{display:none!important}.editorialIllustrationCaption{text-align:center;font-size:.72rem!important;color:#8d8985!important}
+
+.editorialIntro{background:#f8f6f3;border:1px solid var(--line)!important}.editorialIntroCard{padding:22px 22px 24px!important}.editorialIntroCard h2{font-family:Inter,ui-sans-serif,system-ui,sans-serif!important;font-size:1.1rem!important;font-weight:850!important}.editorialNumber{margin-bottom:14px!important;color:#d25046!important}
+.editorialCatalog{padding-top:58px!important}.editorialSectionTitle h2{font-family:Inter,ui-sans-serif,system-ui,sans-serif!important;font-weight:900!important;font-size:clamp(2.3rem,4.5vw,4rem)!important}.editorialCategories{background:#fff!important}.editorialCategory{padding:15px 17px!important}.editorialCategory strong{font-size:.84rem!important}.editorialConceptGrid{gap:0!important;border-top:1px solid var(--line);border-left:1px solid var(--line);background:#fff}.editorialConceptCard{min-height:300px!important;padding:18px!important;border:0!important;border-right:1px solid var(--line)!important;border-bottom:1px solid var(--line)!important;background:#fff!important;box-shadow:none!important}.editorialConceptCard:hover{transform:none!important;background:#fcf7f4!important}.editorialConceptCard h3{font-family:Inter,ui-sans-serif,system-ui,sans-serif!important;font-size:1.2rem!important;font-weight:850!important}.editorialConceptMeta{color:#c54b42!important}.editorialConceptLink{color:#c54b42!important}.conceptSketch{height:150px!important;border:0!important;background:transparent!important;margin-bottom:14px!important}
+
+/* Lesson pages use a clean readable programming-handbook layout. */
+.lessonEditorialLayout{grid-template-columns:160px minmax(0,1fr)!important;gap:38px!important;padding-top:34px!important}.lessonCatalog{top:28px!important}.lessonCatalogTitle,.lessonEditorialHero h1,.lessonSectionIntro h2,.lessonChallenge h2,.lessonTextPanel p,.lessonAnalogySection blockquote,.engineeringItem strong,.lessonBoundary strong,.relatedConcepts strong,.lessonPager strong{font-family:Inter,ui-sans-serif,system-ui,sans-serif!important}.lessonCatalogTitle{font-weight:900!important}.lessonEditorialHero{grid-template-columns:.7fr 1.3fr!important;gap:30px!important}.lessonEditorialHero h1{font-weight:950!important;font-size:clamp(3.8rem,7vw,6.3rem)!important}.lessonHeroFigure{padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important}.lessonFigureLabel{display:none!important}.lessonHeroFigure figcaption{text-align:center;color:#8b8783!important}.conceptIllustrationSvg{border:0!important;background:transparent!important}.lessonSectionIntro h2,.lessonChallenge h2{font-weight:900!important;line-height:1.03!important}.lessonTextPanel p{font-size:1.08rem!important;font-weight:650!important}.lessonStep h3{font-family:Inter,ui-sans-serif,system-ui,sans-serif!important;font-weight:850!important}.lessonAnalogySection blockquote{font-weight:760!important}.engineeringItem strong,.lessonBoundary strong,.relatedConcepts strong,.lessonPager strong{font-weight:800!important}.lessonChallenge{background:#f7eee9!important}.lessonHeroMeta span{background:#fff!important}
+
+/* MCP scene now sits inside the handbook rather than looking like another product. */
+.lessonEditorial .novaMission{border:1px solid #d9d4cf!important;background:#fff!important}.lessonEditorial .novaTopbar{background:#eee9e3!important}.lessonEditorial .novaPanel,.lessonEditorial .novaReveal,.lessonEditorial .novaArchitecture{background:#fff!important}.lessonEditorial .novaPrimary{background:#db564a!important}.lessonEditorial .novaScene{background:radial-gradient(circle at 50% 28%,#fffaf3 0%,#eee6db 68%,#ddd2c6 100%)!important}
+
+@media(max-width:920px){
+  .atlasSidebar{display:none}.atlasMobileNav{display:flex}.atlasHome,.lessonEditorial,.editorialFooter{margin-left:0}.editorialHero{padding-top:34px!important}.lessonEditorialLayout{grid-template-columns:1fr!important}.lessonCatalog{top:auto!important}
+}
+@media(max-width:700px){
+  .atlasHome .container,.lessonEditorial .container{width:calc(100% - 24px)!important}.editorialHero{grid-template-columns:1fr!important}.editorialHero h1{font-size:clamp(2.9rem,15vw,4.2rem)!important}.editorialConceptGrid{grid-template-columns:1fr!important}.lessonEditorialHero{grid-template-columns:1fr!important}.lessonEditorialHero h1{font-size:clamp(3.2rem,18vw,4.8rem)!important}
+}
