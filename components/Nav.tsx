@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { NovaMascot } from "@/components/NovaMascot";
 
 const groups = [
-  { label: "Start here", links: [{ href: "/", text: "AI Atlas" }, { href: "/#concepts", text: "Concept catalog" }] },
+  { label: "Start here", links: [{ href: "/", text: "AI Atlas" }, { href: "/paths", text: "Learning paths" }, { href: "/#concepts", text: "Concept catalog" }] },
   { label: "Knowledge", links: [{ href: "/learn/rag", text: "RAG" }] },
   { label: "Connections", links: [{ href: "/learn/mcp", text: "MCP" }] },
   { label: "Agents", links: [{ href: "/learn/agents", text: "AI Agents" }, { href: "/learn/multi-agent", text: "Multi-Agent" }] },
@@ -52,6 +52,7 @@ export function Nav() {
       <header className="atlasMobileNav">
         <Link href="/" className="mobileBrand" aria-label="AI Atlas home"><span className="mobileBrandMark">N</span><strong>AI Atlas</strong></Link>
         <nav aria-label="Mobile navigation">
+          <Link href="/paths" className={pathname === "/paths" ? "active" : undefined} aria-current={pathname === "/paths" ? "page" : undefined}>Paths</Link>
           <Link href="/#concepts">Catalog</Link>
           <Link href="/learn/mcp" className={pathname === "/learn/mcp" ? "active" : undefined} aria-current={pathname === "/learn/mcp" ? "page" : undefined}>MCP</Link>
         </nav>

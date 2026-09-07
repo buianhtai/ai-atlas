@@ -5,6 +5,7 @@ import { Nav } from "@/components/Nav";
 import { NovaMascot } from "@/components/NovaMascot";
 import { ConceptIllustration } from "@/components/ConceptIllustration";
 import { MCPMissionLazy } from "@/components/MCPMissionLazy";
+import { LessonCompletion } from "@/components/LessonCompletion";
 import { concepts, getConcept } from "@/lib/concepts";
 import { lessonDetails } from "@/lib/lessonDetails";
 
@@ -186,6 +187,8 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
                 <span>I can name one important limitation.</span>
               </div>
             </section>
+
+            <LessonCompletion slug={slug} />
 
             <section className="lessonSection lessonConnections">
               <div className="lessonSectionIntro">

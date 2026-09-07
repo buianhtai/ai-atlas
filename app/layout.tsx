@@ -7,6 +7,7 @@ import "./shell.css";
 import "./catalog-v3.css";
 import "./polish-v4.css";
 import "./final-polish.css";
+import "./paths.css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
