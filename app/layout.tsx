@@ -1,6 +1,8 @@
 import "./globals.css";
 import "./responsive.css";
 import "./editorial.css";
+import "./home-v2.css";
+import "./lesson.css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

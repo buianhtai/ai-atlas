@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Nav } from "@/components/Nav";
-import { ConceptWorld } from "@/components/ConceptWorld";
+import { AtlasOverviewIllustration } from "@/components/AtlasOverviewIllustration";
+import { ConceptIllustration } from "@/components/ConceptIllustration";
 import { concepts } from "@/lib/concepts";
 
 const categoryOrder = [
@@ -12,19 +13,6 @@ const categoryOrder = [
   { name: "Engineering", note: "Evals, safety, observability" },
 ];
 
-function ConceptSketch({ index }: { index: number }) {
-  const variant = index % 3;
-  return (
-    <div className={`conceptSketch conceptSketch--${variant}`} aria-hidden="true">
-      <div className="sketchNode sketchNode--a" />
-      <div className="sketchNode sketchNode--b" />
-      <div className="sketchNode sketchNode--c" />
-      <div className="sketchLine sketchLine--a" />
-      <div className="sketchLine sketchLine--b" />
-    </div>
-  );
-}
-
 export default function Home() {
   return (
     <>
@@ -34,35 +22,35 @@ export default function Home() {
           <div className="editorialHeroCopy">
             <div className="editorialKicker">AI concepts, explained visually</div>
             <h1>Understand the systems behind modern AI.</h1>
-            <p>Explore visual stories, interactive missions, and real architecture diagrams that make complex AI concepts easier to remember and apply.</p>
+            <p>Learn the way an engineer teaches another engineer: start with the problem, draw the system, connect it to a memorable analogy, then inspect how it works in practice.</p>
             <div className="editorialActions">
               <Link className="editorialPrimary" href="/learn/mcp">Start with MCP</Link>
               <a className="editorialSecondary" href="#catalog">Browse the catalog</a>
             </div>
           </div>
 
-          <div className="editorialHeroIllustration">
-            <div className="editorialIllustrationTitle">The AI systems map</div>
-            <ConceptWorld />
-            <div className="editorialIllustrationCaption">A visual atlas of how models, knowledge, tools, and agents connect.</div>
-          </div>
+          <figure className="editorialHeroIllustration">
+            <div className="editorialIllustrationTitle">The AI systems workshop</div>
+            <AtlasOverviewIllustration />
+            <figcaption className="editorialIllustrationCaption">Models become useful systems when knowledge, tools, agents, and explicit workflows are connected around them.</figcaption>
+          </figure>
         </section>
 
         <section className="editorialIntro container">
           <div className="editorialIntroCard">
             <span className="editorialNumber">01</span>
             <h2>See the problem first.</h2>
-            <p>Start with the situation a technology was invented to solve.</p>
+            <p>Start with the situation a technology was invented to solve—not its acronym.</p>
           </div>
           <div className="editorialIntroCard">
             <span className="editorialNumber">02</span>
-            <h2>Interact with the idea.</h2>
-            <p>Use a visual mission to build the mental model yourself.</p>
+            <h2>Build a mental picture.</h2>
+            <p>Use a distinct illustration and analogy so the concept has somewhere to live in your memory.</p>
           </div>
           <div className="editorialIntroCard">
             <span className="editorialNumber">03</span>
-            <h2>Reveal the architecture.</h2>
-            <p>Map the metaphor directly to the real engineering system.</p>
+            <h2>Reveal the engineering.</h2>
+            <p>Map the picture directly to the real architecture, tradeoffs, and production concerns.</p>
           </div>
         </section>
 
@@ -70,9 +58,9 @@ export default function Home() {
           <div className="editorialSectionTitle">
             <div>
               <span>Catalog</span>
-              <h2>Choose a learning world.</h2>
+              <h2>The modern AI systems catalog.</h2>
             </div>
-            <p>Concepts are grouped by the role they play in an AI system, not by buzzword popularity.</p>
+            <p>Each concept gets its own visual language instead of sharing one generic “AI” diagram.</p>
           </div>
 
           <div className="editorialCategories">
@@ -86,19 +74,21 @@ export default function Home() {
           </div>
 
           <div className="editorialConceptGrid" id="concepts">
-            {concepts.map((concept, index) => (
+            {concepts.map((concept) => (
               <Link href={`/learn/${concept.slug}`} className="editorialConceptCard" key={concept.slug}>
-                <ConceptSketch index={index} />
+                <div className="editorialConceptIllustration">
+                  <ConceptIllustration slug={concept.slug} />
+                </div>
                 <div className="editorialConceptMeta">{concept.category}</div>
                 <h3>{concept.name}</h3>
                 <p>{concept.simple}</p>
-                <span className="editorialConceptLink">Explore concept →</span>
+                <span className="editorialConceptLink">Open illustrated guide →</span>
               </Link>
             ))}
           </div>
         </section>
       </main>
-      <footer className="editorialFooter"><div className="container">AI Atlas · Visual learning for modern AI systems.</div></footer>
+      <footer className="editorialFooter"><div className="container">AI Atlas · Illustrated engineering guides for modern AI systems.</div></footer>
     </>
   );
 }

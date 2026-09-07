@@ -1,0 +1,149 @@
+/* Editorial lesson system — closer to an illustrated engineering handbook than a dashboard. */
+body:has(.lessonEditorial){background:#f7f3ea;color:#2d2925}
+body:has(.lessonEditorial) .atlasNavWrap{background:rgba(247,243,234,.95);border-bottom:1px solid #d8d0c4;backdrop-filter:blur(16px)}
+body:has(.lessonEditorial) .atlasBrandText{color:#2d2925}
+body:has(.lessonEditorial) .atlasBrandMark{background:#df6558;color:#fff;border-radius:3px;box-shadow:none}
+body:has(.lessonEditorial) .atlasNavLinks{color:#6f675f}
+body:has(.lessonEditorial) .atlasNavLinks a:hover{color:#2d2925}
+body:has(.lessonEditorial) .atlasNavPill{background:#fffaf2;border-color:#d8d0c4;color:#6e655d}
+
+.lessonEditorial{min-height:100vh;background:#f7f3ea;color:#2d2925}
+.lessonEditorial .container{width:min(1180px,calc(100% - 32px))}
+.lessonEditorialLayout{display:grid;grid-template-columns:190px minmax(0,1fr);gap:46px;padding:42px 0 96px}
+.lessonCatalog{position:sticky;top:96px;align-self:start;border-top:2px solid #4e4943}
+.lessonCatalogTitle{padding:14px 4px 12px;font-family:Georgia,'Times New Roman',serif;font-size:1rem;font-weight:700;border-bottom:1px solid #d8d0c4}
+.lessonCatalog a{display:grid;grid-template-columns:28px 1fr;gap:8px;padding:12px 4px;border-bottom:1px solid #ded6cb;color:#746d66;font-size:.78rem;transition:color .16s ease,background .16s ease}
+.lessonCatalog a span{color:#b1a79c;font-size:.65rem;padding-top:2px}
+.lessonCatalog a strong{font-weight:650}
+.lessonCatalog a:hover,.lessonCatalog a.active{color:#bb4f44;background:rgba(223,101,88,.035)}
+.lessonCatalog a.active span{color:#d95d4f}
+
+.lessonArticle{min-width:0}
+.lessonEditorialHero{display:grid;grid-template-columns:.76fr 1.24fr;gap:42px;align-items:center;padding:8px 0 58px;border-bottom:1px solid #d8d0c4}
+.lessonBreadcrumb{display:flex;gap:8px;align-items:center;margin-bottom:36px;color:#958b82;font-size:.72rem}
+.lessonBreadcrumb a{color:#bb4f44;font-weight:700}
+.lessonKicker{color:#d95d4f;font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.lessonEditorialHero h1{margin:10px 0 18px;font-family:Georgia,'Times New Roman',serif;font-size:clamp(4.2rem,8vw,7rem);line-height:.86;letter-spacing:-.065em;color:#2d2925}
+.lessonDeck{margin:0;color:#6f675f;font-size:1.18rem;line-height:1.62;max-width:520px}
+.lessonHeroMeta{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}
+.lessonHeroMeta span{padding:7px 9px;border:1px solid #d4cabe;background:#fffaf2;color:#776f67;font-size:.66rem;font-weight:700}
+.lessonHeroFigure{margin:0;padding:14px;border:1px solid #d7cec2;background:#fffdf8;box-shadow:0 18px 46px rgba(85,64,45,.08)}
+.lessonFigureLabel{padding:4px 4px 11px;color:#8b8178;font-size:.65rem;font-weight:800;letter-spacing:.11em;text-transform:uppercase}
+.conceptIllustrationSvg{display:block;width:100%;height:auto;border:1px solid #dfd6cb;background:#fffaf2}
+.lessonHeroFigure figcaption{padding:13px 4px 2px;color:#817970;font-size:.76rem;line-height:1.5}
+
+.lessonMissionSection{padding:62px 0 12px}
+.lessonSection{padding:66px 0;border-bottom:1px solid #d8d0c4}
+.lessonSectionIntro{margin-bottom:26px;max-width:760px}
+.lessonSectionIntro.compact{margin-bottom:20px}
+.lessonSectionIntro>span,.lessonChallenge>div>span{display:block;margin-bottom:8px;color:#d95d4f;font-size:.68rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.lessonSectionIntro h2,.lessonChallenge h2{margin:0;font-family:Georgia,'Times New Roman',serif;font-size:clamp(2.25rem,4vw,3.6rem);line-height:1;letter-spacing:-.045em;color:#2d2925}
+.lessonSectionIntro>p,.lessonSectionIntro.split>p,.lessonChallenge p{color:#766e66;line-height:1.65}
+.lessonSectionIntro.split{display:grid;grid-template-columns:1fr .72fr;gap:44px;align-items:end;max-width:none}
+.lessonSectionIntro.split>p{margin:0}
+
+.lessonProblemGrid{display:grid;grid-template-columns:1fr 1fr;border:1px solid #d6cdc1;background:#fffaf2}
+.lessonTextPanel{padding:28px 30px;min-height:220px}
+.lessonTextPanel+ .lessonTextPanel{border-left:1px solid #d6cdc1}
+.lessonTextPanel.accent{background:#f7e3df}
+.lessonTextPanel small,.lessonBoundary small,.engineeringItem small{display:block;margin-bottom:18px;color:#a49a90;font-size:.65rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.lessonTextPanel p{margin:0;font-family:Georgia,'Times New Roman',serif;font-size:1.28rem;line-height:1.56;color:#4b4641}
+
+.lessonSteps{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #d8d0c4;border-left:1px solid #d8d0c4;background:#fffdf8}
+.lessonStep{position:relative;min-height:230px;padding:22px 20px;border-right:1px solid #d8d0c4;border-bottom:1px solid #d8d0c4}
+.lessonStepNumber{margin-bottom:52px;color:#d95d4f;font-size:.7rem;font-weight:800}
+.lessonStep h3{margin:0 0 8px;font-family:Georgia,'Times New Roman',serif;font-size:1.35rem;letter-spacing:-.025em}
+.lessonStep p{margin:0;color:#786f67;font-size:.86rem;line-height:1.58}
+.lessonStep:not(:last-child)::after{content:'→';position:absolute;right:-10px;top:50%;z-index:2;width:20px;height:20px;display:grid;place-items:center;background:#f7f3ea;color:#d95d4f;font-weight:800}
+
+.lessonAnalogySection{display:grid;grid-template-columns:.62fr 1.38fr;gap:36px;align-items:start}
+.lessonAnalogySection .lessonSectionIntro{margin:0}
+.lessonAnalogySection blockquote{grid-column:2;margin:0;padding:32px 34px;border-left:4px solid #d95d4f;background:#fffaf2;font-family:Georgia,'Times New Roman',serif;font-size:clamp(1.55rem,3vw,2.35rem);line-height:1.34;color:#403b36}
+.lessonAnalogyNote{grid-column:2;margin:0;color:#827970;line-height:1.6;font-size:.86rem}
+
+.engineeringGrid{display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid #d8d0c4;border-left:1px solid #d8d0c4;background:#fffdf8}
+.engineeringItem{padding:24px;min-height:140px;border-right:1px solid #d8d0c4;border-bottom:1px solid #d8d0c4}
+.engineeringItem small{margin-bottom:14px}
+.engineeringItem strong{display:block;font-family:Georgia,'Times New Roman',serif;font-size:1.22rem;line-height:1.45;color:#423d38}
+
+.lessonBoundaryGrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.lessonBoundary{min-height:190px;padding:26px;border:1px solid #d6cdc1;background:#fffdf8}
+.lessonBoundary.yes{border-top:4px solid #6d9c78}
+.lessonBoundary.no{border-top:4px solid #d95d4f}
+.lessonBoundary strong{display:block;font-family:Georgia,'Times New Roman',serif;font-size:1.2rem;line-height:1.5;color:#4a443e}
+
+.lessonChallenge{display:grid;grid-template-columns:1fr .85fr;gap:46px;align-items:center;background:#efe7dc;margin-top:66px;padding:38px 40px;border:1px solid #d4cabe}
+.lessonChallenge p{margin-bottom:0}
+.challengeChecklist{display:grid;gap:0;border-top:1px solid #cabfb4}
+.challengeChecklist span{position:relative;padding:14px 8px 14px 34px;border-bottom:1px solid #cabfb4;color:#5e5751;font-size:.84rem}
+.challengeChecklist span::before{content:'□';position:absolute;left:6px;color:#d95d4f;font-size:1rem}
+
+.relatedConcepts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.relatedConcepts a{min-height:190px;padding:20px;border:1px solid #d6cdc1;background:#fffdf8;transition:transform .16s ease,box-shadow .16s ease}
+.relatedConcepts a:hover{transform:translateY(-2px);box-shadow:0 14px 35px rgba(84,64,48,.08)}
+.relatedConcepts small,.relatedConcepts strong,.relatedConcepts span{display:block}
+.relatedConcepts small{color:#d95d4f;font-size:.62rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
+.relatedConcepts strong{margin:38px 0 8px;font-family:Georgia,'Times New Roman',serif;font-size:1.35rem;color:#3f3a35}
+.relatedConcepts span{color:#7d756d;font-size:.8rem;line-height:1.52}
+.lessonPager{display:grid;grid-template-columns:1fr 1fr;margin-top:34px;border-top:1px solid #d8d0c4;border-bottom:1px solid #d8d0c4}
+.lessonPager>a{padding:20px 4px;color:#514b45}
+.lessonPager>a.next{text-align:right;border-left:1px solid #d8d0c4;padding-right:4px}
+.lessonPager small,.lessonPager strong{display:block}
+.lessonPager small{margin-bottom:5px;color:#9b9187;font-size:.62rem;text-transform:uppercase;letter-spacing:.09em}
+.lessonPager strong{font-family:Georgia,'Times New Roman',serif;font-size:1.02rem}
+
+/* Reframe the interactive MCP mission inside the editorial system. */
+.lessonEditorial .novaMission{border:1px solid #cfc4b8;border-radius:2px;box-shadow:none;background:#fffaf2;overflow:hidden}
+.lessonEditorial .novaTopbar{background:#f0e8dd;color:#776f67;border-bottom:1px solid #cfc4b8}
+.lessonEditorial .novaStatus{color:#5c554e}
+.lessonEditorial .novaPanel{background:#fffaf2;border-top:1px solid #cfc4b8}
+.lessonEditorial .novaPanel h2{font-family:Georgia,'Times New Roman',serif;color:#342f2b}
+.lessonEditorial .novaPanel p,.lessonEditorial .novaInstruction,.lessonEditorial .novaLoading{color:#766e66}
+.lessonEditorial .novaStep,.lessonEditorial .novaReveal span,.lessonEditorial .novaArchitectureHead span{color:#c85348}
+.lessonEditorial .novaPrimary{background:#df6558;color:white;border-radius:3px}
+.lessonEditorial .novaReveal,.lessonEditorial .novaArchitecture{border-top-color:#d8d0c4;background:#faf5ed;color:#6f675f}
+.lessonEditorial .novaArchitectureHead strong{color:#837970}
+.lessonEditorial .novaArchitectureFlow>div{background:#fffdf8;border-color:#d8d0c4}
+.lessonEditorial .novaArchitectureFlow>div.accent{background:#f7e3df;border-color:#df9b93}
+.lessonEditorial .novaArchitectureFlow small{color:#9c9186}
+.lessonEditorial .novaArchitectureFlow strong{color:#4b4540}
+.lessonEditorial .novaArchitectureFlow i{color:#d95d4f}
+
+@media(max-width:1024px){
+  .lessonEditorialLayout{grid-template-columns:1fr;gap:20px;padding-top:24px}
+  .lessonCatalog{position:static;display:flex;overflow-x:auto;border-top:0;border-bottom:1px solid #d8d0c4;scrollbar-width:none;padding-bottom:8px}
+  .lessonCatalog::-webkit-scrollbar{display:none}
+  .lessonCatalogTitle{display:none}
+  .lessonCatalog a{flex:0 0 auto;display:flex;gap:7px;align-items:center;border:1px solid #d8d0c4;border-bottom:1px solid #d8d0c4;padding:10px 12px;margin-right:6px;background:#fffaf2}
+  .lessonEditorialHero{grid-template-columns:1fr;gap:26px}
+  .lessonHeroFigure{max-width:820px}
+  .lessonSteps{grid-template-columns:repeat(2,1fr)}
+  .lessonStep:nth-child(2)::after{display:none}
+}
+
+@media(max-width:767px){
+  .lessonEditorial .container{width:calc(100% - 24px)}
+  .lessonEditorialLayout{padding-bottom:64px}
+  .lessonEditorialHero{padding-bottom:38px}
+  .lessonBreadcrumb{margin-bottom:26px}
+  .lessonEditorialHero h1{font-size:clamp(3.6rem,20vw,5.4rem)}
+  .lessonDeck{font-size:1.02rem}
+  .lessonHeroFigure{padding:9px}
+  .lessonMissionSection,.lessonSection{padding:46px 0}
+  .lessonSectionIntro.split{grid-template-columns:1fr;gap:14px}
+  .lessonProblemGrid{grid-template-columns:1fr}
+  .lessonTextPanel{min-height:auto;padding:24px 20px}
+  .lessonTextPanel+ .lessonTextPanel{border-left:0;border-top:1px solid #d6cdc1}
+  .lessonSteps{grid-template-columns:1fr}
+  .lessonStep{min-height:auto;padding:20px}
+  .lessonStepNumber{margin-bottom:26px}
+  .lessonStep::after{display:none!important}
+  .lessonAnalogySection{grid-template-columns:1fr;gap:18px}
+  .lessonAnalogySection blockquote,.lessonAnalogyNote{grid-column:1}
+  .lessonAnalogySection blockquote{padding:24px 22px}
+  .engineeringGrid,.lessonBoundaryGrid,.lessonChallenge,.relatedConcepts{grid-template-columns:1fr}
+  .lessonChallenge{gap:26px;margin-top:46px;padding:28px 22px}
+  .relatedConcepts a{min-height:160px}
+  .lessonPager{grid-template-columns:1fr}
+  .lessonPager>a.next{border-left:0;border-top:1px solid #d8d0c4}
+}
