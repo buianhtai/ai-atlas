@@ -5,6 +5,7 @@ import { Float, Html, OrbitControls, RoundedBox } from "@react-three/drei";
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
 import type { Group } from "three";
+import { useResponsive3D } from "@/components/useResponsive3D";
 
 const islands = [
   { label: "MCP", slug: "mcp", position: [-3.2, 1.1, 0] as [number,number,number], color: "#55e7ff", icon: "🔌" },
@@ -26,9 +27,9 @@ function Robot() {
         </RoundedBox>
         <mesh position={[-.36,.12,.44]}><sphereGeometry args={[.11,24,24]}/><meshStandardMaterial color="#18263a"/></mesh>
         <mesh position={[.36,.12,.44]}><sphereGeometry args={[.11,24,24]}/><meshStandardMaterial color="#18263a"/></mesh>
-        <mesh position={[0,-.22,.45]} rotation={[0,0,Math.PI/2]}><torusGeometry args={[.18,.035,12,30,Math.PI]}/><meshStandardMaterial color="#55e7ff"/></mesh>
+        <mesh position={[0,-.22,.45]} rotation={[0,0,Math.PI/2]}><torusGeometry args={[.18,.035,12,30,Math.PI]}/><meshStandardMaterial color="#55e7f7"/></mesh>
         <mesh position={[0,.78,0]}><cylinderGeometry args={[.035,.035,.32,12]}/><meshStandardMaterial color="#c29cff"/></mesh>
-        <mesh position={[0,.98,0]}><sphereGeometry args={[.1,20,20]}/><meshStandardMaterial color="#ffd66b" emissive="#ffd66b" emissiveIntensity={1.4}/></mesh>
+        <mesh position={[0,.98,0]}><sphereGeometry args={[.1,20,20]}/><meshStandardMaterial color="#ffd36b" emissive="#ffd36b" emissiveIntensity={1.4}/></mesh>
       </group>
     </Float>
   );
@@ -52,18 +53,23 @@ function ConceptIsland({label,slug,position,color,icon}:{label:string;slug:strin
 }
 
 export function ConceptWorld() {
+  const { compact, tablet, dpr } = useResponsive3D();
+  const cameraZ = compact ? 9.6 : tablet ? 8.8 : 8;
+  const minDistance = compact ? 7.8 : 6;
+  const maxDistance = compact ? 11.5 : 10;
+
   return (
     <div className="worldShell">
-      <Canvas camera={{position:[0,0.5,8],fov:43}} dpr={[1,1.6]}>
+      <Canvas camera={{position:[0,0.5,cameraZ],fov:compact ? 48 : 43}} dpr={dpr}>
         <ambientLight intensity={1.8}/>
         <directionalLight position={[4,7,6]} intensity={2.7}/>
         <pointLight position={[-5,2,3]} intensity={20} color="#55e7ff"/>
         <pointLight position={[5,-1,2]} intensity={15} color="#c29cff"/>
         <Robot/>
         {islands.map((item)=><ConceptIsland key={item.slug} {...item}/>)}
-        <OrbitControls enablePan={false} minDistance={6} maxDistance={10} autoRotate autoRotateSpeed={.45}/>
+        <OrbitControls enablePan={false} minDistance={minDistance} maxDistance={maxDistance} autoRotate={!compact} autoRotateSpeed={.45}/>
       </Canvas>
-      <div className="worldHint">Drag to explore · click a floating island</div>
+      <div className="worldHint">{compact ? "Swipe to explore · tap a concept" : "Drag to explore · click a floating island"}</div>
     </div>
   );
 }
