@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Nav } from "@/components/Nav";
+import { NovaMascot } from "@/components/NovaMascot";
 import { ConceptIllustration } from "@/components/ConceptIllustration";
 import { MCPNovaMission } from "@/components/MCPNovaMission";
 import { concepts, getConcept } from "@/lib/concepts";
@@ -147,10 +148,13 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
             </section>
 
             <section className="lessonSection lessonChallenge">
-              <div>
-                <span>06 · Feynman challenge</span>
-                <h2>Can you teach it back?</h2>
-                <p>{detail.challenge}</p>
+              <div className="lessonChallengeGuide">
+                <NovaMascot className="challengeNova" pose="think" title="Nova thinking about the Feynman challenge" />
+                <div>
+                  <span>06 · Feynman challenge</span>
+                  <h2>Can you teach it back?</h2>
+                  <p>{detail.challenge}</p>
+                </div>
               </div>
               <div className="challengeChecklist">
                 <span>I can explain the problem it solves.</span>
