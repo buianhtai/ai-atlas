@@ -26,7 +26,7 @@ export default function Home() {
   return (
     <>
       <Nav />
-      <main className="atlasHome">
+      <main className="atlasHome" id="main-content">
         <section className="editorialHero container">
           <div className="editorialHeroCopy">
             <div className="editorialKicker">AI concepts, explained visually</div>
