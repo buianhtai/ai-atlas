@@ -1,45 +1,73 @@
 import Link from "next/link";
 import { Nav } from "@/components/Nav";
 import { ConceptWorld } from "@/components/ConceptWorld";
+import { AtlasBadge, AtlasEyebrow } from "@/components/AtlasUI";
 import { concepts } from "@/lib/concepts";
+
+const categoryOrder = ["Foundations", "Knowledge", "Connections", "Agents", "Agent Systems", "Engineering"];
 
 export default function Home() {
   return (
     <>
       <Nav />
-      <main className="container">
-        <section className="hero hero3d">
-          <div>
-            <div className="eyebrow">Learn AI like a game</div>
-            <h1>Walk through an <span className="gradient">AI world.</span></h1>
-            <p className="lead">Instead of reading definitions, explore cartoon 3D scenes that turn MCP, RAG, agents and frameworks into simple visual stories.</p>
-            <div className="ctaRow">
-              <Link className="btn primary" href="/learn/mcp">Enter MCP world →</Link>
-              <a className="btn secondary" href="#concepts">Browse concepts</a>
+      <main>
+        <section className="atlasHero container">
+          <div className="atlasHeroCopy">
+            <AtlasBadge>Interactive AI learning atlas</AtlasBadge>
+            <AtlasEyebrow>See the system before memorizing the term</AtlasEyebrow>
+            <h1>Understand modern AI through <span>visual missions.</span></h1>
+            <p>AI Atlas turns abstract concepts into explorable scenes, guided interactions, and architecture reveals—so you understand why a technology exists before learning its vocabulary.</p>
+            <div className="atlasHeroActions">
+              <Link className="atlasButton" href="/learn/mcp">Start with MCP</Link>
+              <a className="atlasButton atlasButton--secondary" href="#concepts">Explore the atlas</a>
+            </div>
+            <div className="atlasProofRow">
+              <div><strong>01</strong><span>See the problem</span></div>
+              <div><strong>02</strong><span>Interact with it</span></div>
+              <div><strong>03</strong><span>Reveal the architecture</span></div>
             </div>
           </div>
-          <ConceptWorld />
+          <div className="atlasHeroWorld">
+            <ConceptWorld />
+          </div>
         </section>
 
-        <section className="section" id="concepts">
-          <div className="sectionHeader">
-            <div><div className="eyebrow">Choose a world</div><h2>Every concept becomes a visual story</h2></div>
-            <p>Start simple, then connect the ideas.</p>
+        <section className="atlasBand">
+          <div className="container">
+            <div className="atlasBandLabel">Learning worlds</div>
+            <div className="atlasCategoryRail">
+              {categoryOrder.map((category, index) => (
+                <div className="atlasCategory" key={category}>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <strong>{category}</strong>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="grid">
+        </section>
+
+        <section className="container atlasConceptSection" id="concepts">
+          <div className="atlasSectionHead">
+            <div>
+              <AtlasEyebrow>Explore concepts</AtlasEyebrow>
+              <h2>Build the mental model one system at a time.</h2>
+            </div>
+            <p>Each lesson starts with a visual metaphor, moves through an interactive mission, and ends with the real engineering model.</p>
+          </div>
+          <div className="atlasConceptGrid">
             {concepts.map((concept, index) => (
-              <Link className="card cartoonCard" href={`/learn/${concept.slug}`} key={concept.slug}>
-                <div className="cartoonOrb">{["🔌","📚","🤖","👥","🧱","🕸️"][index] ?? "✨"}</div>
-                <div className="kicker">{concept.category}</div>
+              <Link href={`/learn/${concept.slug}`} className="atlasConceptCard" key={concept.slug}>
+                <div className="atlasConceptIndex">{String(index + 1).padStart(2, "0")}</div>
+                <div className="atlasConceptMeta">{concept.category}</div>
                 <h3>{concept.name}</h3>
                 <p>{concept.simple}</p>
-                <span className="tag">Explore world →</span>
+                <span className="atlasConceptAction">Open lesson <b>↗</b></span>
               </Link>
             ))}
           </div>
         </section>
       </main>
-      <footer><div className="container">AI Atlas · Feynman learning in a playful 3D world.</div></footer>
+      <footer className="atlasFooter"><div className="container">AI Atlas · Learn complex AI systems by seeing how they work.</div></footer>
     </>
   );
 }

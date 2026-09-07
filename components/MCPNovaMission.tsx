@@ -92,5 +92,20 @@ export function MCPNovaMission() {
       </div>
     </div>
     <div className="novaReveal"><span>What just happened?</span><strong>Nova didn’t learn GitHub, Drive, or databases individually. MCP gave the AI app a standard connection layer.</strong></div>
+    <div className="novaArchitecture">
+      <div className="novaArchitectureHead">
+        <span>Architecture reveal</span>
+        <strong>The cartoon metaphor maps to a real MCP system.</strong>
+      </div>
+      <div className="novaArchitectureFlow">
+        <div><small>AI application</small><strong>Nova</strong></div>
+        <i>→</i>
+        <div><small>Connection</small><strong>MCP Client</strong></div>
+        <i>→</i>
+        <div className="accent"><small>Protocol boundary</small><strong>MCP Server</strong></div>
+        <i>→</i>
+        <div><small>Capability</small><strong>Tool / Resource</strong></div>
+      </div>
+    </div>
   </section>;
 }
