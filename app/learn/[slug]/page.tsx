@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Nav } from "@/components/Nav";
 import { LessonWorld } from "@/components/LessonWorld";
+import { MCPNovaMission } from "@/components/MCPNovaMission";
 import { concepts, getConcept } from "@/lib/concepts";
 
 export function generateStaticParams() {
@@ -28,8 +29,10 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
               <h1>{concept.name}</h1>
               <p className="bigIdea">{concept.simple}</p>
             </div>
-            <LessonWorld slug={slug} />
+            {slug === "mcp" ? null : <LessonWorld slug={slug} />}
           </section>
+
+          {slug === "mcp" && <MCPNovaMission />}
 
           <section className="lessonBlock storyBlock">
             <div className="eyebrow">Visual story</div>
