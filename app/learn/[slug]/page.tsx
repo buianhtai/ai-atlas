@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Nav } from "@/components/Nav";
+import { LessonWorld } from "@/components/LessonWorld";
 import { concepts, getConcept } from "@/lib/concepts";
 
 export function generateStaticParams() {
@@ -21,10 +22,40 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
           {concepts.map((item) => <Link key={item.slug} href={`/learn/${item.slug}`}>{item.name}</Link>)}
         </aside>
         <article className="lesson">
-          <section className="lessonHeader">
-            <div className="eyebrow">{concept.category}</div>
-            <h1>{concept.name}</h1>
-            <p className="bigIdea">{concept.simple}</p>
+          <section className="lessonHeader lessonHero">
+            <div>
+              <div className="eyebrow">{concept.category}</div>
+              <h1>{concept.name}</h1>
+              <p className="bigIdea">{concept.simple}</p>
+            </div>
+            <LessonWorld slug={slug} />
+          </section>
+
+          <section className="lessonBlock storyBlock">
+            <div className="eyebrow">Visual story</div>
+            <h2>Watch the idea before reading the definition</h2>
+            <p>{concept.analogy}</p>
+            <div className="storySteps">
+              {slug === "mcp" ? (
+                <>
+                  <div><span>1</span><strong>AI needs something</strong><small>Code, documents, messages, or data.</small></div>
+                  <div><span>2</span><strong>MCP is the common plug</strong><small>The AI app sees tools through one protocol.</small></div>
+                  <div><span>3</span><strong>The right tool responds</strong><small>GitHub, Drive, Slack, database, and more.</small></div>
+                </>
+              ) : slug === "rag" ? (
+                <>
+                  <div><span>1</span><strong>Ask a question</strong><small>The model does not guess from memory alone.</small></div>
+                  <div><span>2</span><strong>Search the library</strong><small>Retrieve the pages most relevant to the question.</small></div>
+                  <div><span>3</span><strong>Answer with context</strong><small>The retrieved knowledge goes into the model's context.</small></div>
+                </>
+              ) : (
+                <>
+                  <div><span>1</span><strong>Start with a goal</strong><small>Give the system something concrete to accomplish.</small></div>
+                  <div><span>2</span><strong>Move through the workflow</strong><small>Tools, state, or specialized roles do the work.</small></div>
+                  <div><span>3</span><strong>Observe the result</strong><small>Use feedback to decide what happens next.</small></div>
+                </>
+              )}
+            </div>
           </section>
 
           <section className="lessonBlock">
@@ -67,7 +98,7 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
             <div className="eyebrow">Connect the dots</div>
             <h2>Related concepts</h2>
             <p>{concept.related.join(" · ")}</p>
-            <div className="ctaRow"><Link className="btn primary" href="/">Back to the map →</Link></div>
+            <div className="ctaRow"><Link className="btn primary" href="/">Back to the world →</Link></div>
           </section>
         </article>
       </main>
