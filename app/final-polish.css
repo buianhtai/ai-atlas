@@ -1,0 +1,236 @@
+/* Final production polish: focus, progress, loading, and small-screen consistency. */
+
+.srOnly {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.skipLink {
+  position: fixed;
+  z-index: 1000;
+  top: 10px;
+  left: 10px;
+  padding: 10px 14px;
+  border: 2px solid #453f3a;
+  border-radius: 4px;
+  background: #fffdfa;
+  color: #453f3a;
+  font-size: .78rem;
+  font-weight: 850;
+  box-shadow: 0 8px 24px rgba(69, 52, 43, .16);
+  transform: translateY(-160%);
+  transition: transform .16s ease;
+}
+
+.skipLink:focus {
+  transform: translateY(0);
+}
+
+:where(a, button):focus-visible {
+  outline: 3px solid #265f6c;
+  outline-offset: 3px;
+}
+
+.sidebarGroup a.active {
+  background: rgba(92, 20, 16, .22);
+  color: #fff;
+}
+
+.sidebarGroup a.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 7px;
+  bottom: 7px;
+  width: 3px;
+  border-radius: 2px;
+  background: #ffe2d9;
+}
+
+.atlasMobileNav nav a.active {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+}
+
+#catalog,
+#concepts,
+#main-content {
+  scroll-margin-top: 72px;
+}
+
+.lessonProgress {
+  display: grid;
+  grid-template-columns: auto minmax(90px, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  margin: 0 0 28px;
+  color: #8e867f;
+  font-size: .62rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.lessonProgress > div {
+  position: relative;
+  height: 3px;
+  overflow: hidden;
+  background: #e5dfd8;
+}
+
+.lessonProgress > div i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  display: block;
+  height: 100%;
+  background: #de5a4e;
+}
+
+.lessonProgress small {
+  color: #a0978f;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+}
+
+.missionLoading {
+  min-height: 430px;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  border: 1px solid #d8d0c7;
+  background: #fffdfa;
+}
+
+.missionLoadingScene {
+  position: relative;
+  min-height: 330px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 34%, rgba(255, 250, 242, .96), rgba(232, 220, 208, .88) 62%, rgba(216, 202, 188, .86));
+}
+
+.missionLoadingScene::before,
+.missionLoadingScene::after,
+.missionLoadingScene span {
+  content: "";
+  position: absolute;
+  border: 2px solid #b9afa5;
+  background: rgba(255, 253, 250, .72);
+}
+
+.missionLoadingScene::before {
+  width: 78px;
+  height: 78px;
+  left: calc(50% - 39px);
+  top: 72px;
+  border-radius: 22px;
+}
+
+.missionLoadingScene::after {
+  width: 62px;
+  height: 20px;
+  left: calc(50% - 31px);
+  top: 186px;
+  border-radius: 50%;
+  background: rgba(222, 90, 78, .14);
+}
+
+.missionLoadingScene span {
+  width: 86px;
+  height: 48px;
+  bottom: 54px;
+  border-radius: 10px;
+}
+
+.missionLoadingScene span:nth-child(1) { left: 12%; background: rgba(184, 200, 216, .54); }
+.missionLoadingScene span:nth-child(2) { left: calc(50% - 43px); background: rgba(169, 201, 186, .54); }
+.missionLoadingScene span:nth-child(3) { right: 12%; background: rgba(225, 191, 116, .48); }
+
+.missionLoading > div:last-child {
+  padding: 20px 22px;
+  border-top: 1px solid #ded7d0;
+}
+
+.missionLoading strong,
+.missionLoading small {
+  display: block;
+}
+
+.missionLoading strong {
+  margin-bottom: 5px;
+  color: #48423d;
+  font-size: .9rem;
+}
+
+.missionLoading small {
+  color: #817970;
+  line-height: 1.45;
+}
+
+.novaStation:focus-visible,
+.novaPrimary:focus-visible {
+  outline-color: #265f6c;
+}
+
+.catalogPattern,
+.relatedConcepts a,
+.lessonPager a,
+.editorialPrimary,
+.editorialSecondary {
+  transition: transform .16s ease, box-shadow .16s ease, background-color .16s ease;
+}
+
+.catalogPattern:focus-visible,
+.relatedConcepts a:focus-visible,
+.lessonPager a:focus-visible {
+  position: relative;
+  z-index: 2;
+}
+
+@media (hover: hover) {
+  .editorialPrimary:hover,
+  .editorialSecondary:hover {
+    transform: translateY(-1px);
+  }
+}
+
+@media (max-width: 767px) {
+  .lessonProgress {
+    grid-template-columns: auto 1fr;
+    margin-bottom: 20px;
+  }
+
+  .lessonProgress small {
+    display: none;
+  }
+
+  .missionLoading {
+    min-height: 360px;
+  }
+
+  .missionLoadingScene {
+    min-height: 270px;
+  }
+
+  .missionLoadingScene span:nth-child(1) { left: 7%; }
+  .missionLoadingScene span:nth-child(3) { right: 7%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skipLink,
+  .catalogPattern,
+  .relatedConcepts a,
+  .lessonPager a,
+  .editorialPrimary,
+  .editorialSecondary {
+    transition: none !important;
+  }
+}
