@@ -5,6 +5,7 @@ import "./home-v2.css";
 import "./lesson.css";
 import "./shell.css";
 import "./catalog-v3.css";
+import "./polish-v4.css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
