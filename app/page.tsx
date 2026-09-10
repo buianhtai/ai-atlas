@@ -1,9 +1,9 @@
-import { ImmersiveAtlasV2 } from "@/components/ImmersiveAtlasV2";
+import { ImmersiveAtlasV3 } from "@/components/ImmersiveAtlasV3";
 
 export default function Home() {
   return (
     <main className="immersiveHome" id="main-content">
-      <ImmersiveAtlasV2 />
+      <ImmersiveAtlasV3 />
     </main>
   );
 }
