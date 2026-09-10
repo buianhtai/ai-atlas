@@ -1,0 +1,9 @@
+.immersiveAtlasFidelity{background:radial-gradient(circle at 50% 0%,#151a22 0,#090c11 42%,#06080b 100%)}
+.immersiveAtlasFidelity::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:2;background:radial-gradient(circle at center,transparent 42%,rgba(0,0,0,.22) 82%,rgba(0,0,0,.48) 100%);mix-blend-mode:multiply}
+.immersiveAtlasFidelity canvas{filter:saturate(.96) contrast(1.03)}
+.fidelityCopy{background:linear-gradient(145deg,rgba(13,17,23,.86),rgba(8,11,16,.68));border-color:rgba(255,255,255,.14);box-shadow:0 28px 90px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.05)}
+.fidelityCopy h1,.fidelityCopy h2{font-weight:850;letter-spacing:-.055em;text-shadow:0 2px 22px rgba(0,0,0,.3)}
+.fidelityCopy p{color:rgba(231,237,245,.74)}
+.assetCredit{position:fixed;z-index:35;right:24px;bottom:20px;color:rgba(255,255,255,.25);font-size:.55rem;letter-spacing:.06em;pointer-events:none}
+@media(max-width:1024px){.assetCredit{right:18px;bottom:16px}.immersiveAtlasFidelity::after{background:radial-gradient(circle at center,transparent 48%,rgba(0,0,0,.3) 100%)}}
+@media(max-width:767px){.assetCredit{display:none}.fidelityCopy{background:linear-gradient(145deg,rgba(13,17,23,.92),rgba(8,11,16,.82))}.immersiveAtlasFidelity canvas{filter:saturate(.9) contrast(1.02)}}
