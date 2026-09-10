@@ -9,6 +9,7 @@ import "./polish-v4.css";
 import "./final-polish.css";
 import "./paths.css";
 import "./immersive.css";
+import "./high-fidelity.css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
