@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Float, RoundedBox, Scroll, ScrollControls, Stars } from "@react-three/drei";
+import { Float, RoundedBox, Scroll, ScrollControls, Stars, useScroll } from "@react-three/drei";
 import { useMemo, useRef } from "react";
 import * as THREE from "three";
 import { useResponsive3D } from "@/components/useResponsive3D";
@@ -13,7 +13,6 @@ const mint = "#7fe0bd";
 const gold = "#f4c96b";
 const violet = "#9d8cff";
 const ink = "#080a0f";
-const panel = "#121722";
 
 const cameraStops = [
   { position: new THREE.Vector3(0, 1.5, 10), target: new THREE.Vector3(0, .7, 0) },
@@ -67,15 +66,15 @@ function GroundRing({ x, z, color, radius = 2.5 }: { x: number; z: number; color
   );
 }
 
-function CoreModel() {
+function CoreModel({ reducedMotion }: { reducedMotion: boolean }) {
   const group = useRef<THREE.Group>(null);
   useFrame((state) => {
-    if (!group.current) return;
+    if (!group.current || reducedMotion) return;
     group.current.rotation.y = state.clock.elapsedTime * .08;
   });
   return (
     <group ref={group} position={[0, .45, 0]}>
-      <Float speed={1.2} floatIntensity={.22} rotationIntensity={.04}>
+      <Float speed={reducedMotion ? 0 : 1.2} floatIntensity={reducedMotion ? 0 : .22} rotationIntensity={reducedMotion ? 0 : .04}>
         <mesh>
           <icosahedronGeometry args={[1.32, 2]} />
           <meshPhysicalMaterial color="#151e2b" roughness={.18} metalness={.08} transparent opacity={.9} transmission={.06} />
@@ -101,7 +100,7 @@ function CoreModel() {
   );
 }
 
-function KnowledgeWorld() {
+function KnowledgeWorld({ reducedMotion }: { reducedMotion: boolean }) {
   const books = Array.from({ length: 18 });
   return (
     <group position={[-3.2, -.15, -7]}>
@@ -121,7 +120,7 @@ function KnowledgeWorld() {
           </group>
         ))}
       </group>
-      <Float speed={1.7} floatIntensity={.35} rotationIntensity={.08}>
+      <Float speed={reducedMotion ? 0 : 1.7} floatIntensity={reducedMotion ? 0 : .35} rotationIntensity={reducedMotion ? 0 : .08}>
         <group position={[1.1, .55, .15]} rotation={[0, -.18, -.08]}>
           <RoundedBox args={[1.12, 1.42, .08]} radius={.05} smoothness={3}>
             <meshStandardMaterial color="#f5efe4" roughness={.92} />
@@ -156,7 +155,7 @@ function Tube({ points, color, active = false }: { points: [number, number, numb
   );
 }
 
-function ConnectionWorld() {
+function ConnectionWorld({ reducedMotion }: { reducedMotion: boolean }) {
   const endpoints: [number, number, number][] = [[-1.5, -.75, .25], [0, -.95, -.9], [1.55, -.72, .28]];
   return (
     <group position={[3.1, -.02, -14]}>
@@ -185,7 +184,7 @@ function ConnectionWorld() {
       <Tube points={[[0, .25, 0], [-.55, -.1, .05], endpoints[0]]} color={cyan} />
       <Tube points={[[0, .25, 0], [0, -.15, -.35], endpoints[1]]} color={mint} />
       <Tube points={[[0, .25, 0], [.55, -.1, .05], endpoints[2]]} color={gold} />
-      <Float speed={1.5} floatIntensity={.24} rotationIntensity={.04}>
+      <Float speed={reducedMotion ? 0 : 1.5} floatIntensity={reducedMotion ? 0 : .24} rotationIntensity={reducedMotion ? 0 : .04}>
         <mesh position={[0, 1.35, 0]}>
           <octahedronGeometry args={[.48, 0]} />
           <meshStandardMaterial color="#f1f5f7" roughness={.44} />
@@ -195,9 +194,9 @@ function ConnectionWorld() {
   );
 }
 
-function BotNode({ position, color }: { position: [number, number, number]; color: string }) {
+function BotNode({ position, color, reducedMotion }: { position: [number, number, number]; color: string; reducedMotion: boolean }) {
   return (
-    <Float speed={1.2} floatIntensity={.12} rotationIntensity={.025}>
+    <Float speed={reducedMotion ? 0 : 1.2} floatIntensity={reducedMotion ? 0 : .12} rotationIntensity={reducedMotion ? 0 : .025}>
       <group position={position}>
         <RoundedBox args={[.8, .62, .55]} radius={.16} smoothness={3}>
           <meshStandardMaterial color="#e9edf1" roughness={.62} />
@@ -217,7 +216,7 @@ function BotNode({ position, color }: { position: [number, number, number]; colo
   );
 }
 
-function AgentWorld() {
+function AgentWorld({ reducedMotion }: { reducedMotion: boolean }) {
   const positions: [number, number, number][] = [[-1.35, .35, .55], [1.25, .5, .4], [-.95, -.55, -.45], [1.15, -.5, -.55]];
   return (
     <group position={[-3.1, -.02, -21]}>
@@ -229,13 +228,13 @@ function AgentWorld() {
         <circleGeometry args={[.5, 48]} />
         <meshBasicMaterial color={violet} transparent opacity={.7} />
       </mesh>
-      {positions.map((position, index) => <BotNode key={index} position={position} color={[gold, cyan, mint, coral][index]} />)}
+      {positions.map((position, index) => <BotNode key={index} position={position} color={[gold, cyan, mint, coral][index]} reducedMotion={reducedMotion} />)}
       {positions.map((p, index) => <Tube key={index} points={[[p[0], p[1] - .15, p[2]], [p[0] * .45, -.05, p[2] * .4], [0, -.27, 0]]} color={[gold, cyan, mint, coral][index]} />)}
     </group>
   );
 }
 
-function GraphWorld() {
+function GraphWorld({ reducedMotion }: { reducedMotion: boolean }) {
   const nodes: { p: [number, number, number]; color: string; scale: number }[] = [
     { p: [-1.6, .2, .3], color: coral, scale: .22 },
     { p: [-.55, .75, -.1], color: cyan, scale: .28 },
@@ -250,7 +249,7 @@ function GraphWorld() {
       <GroundRing x={0} z={0} color={cyan} radius={3} />
       {edges.map(([a,b], i) => <Tube key={i} points={[nodes[a].p, [0, 0, -.12], nodes[b].p]} color={i === 6 ? coral : "#52606f"} active={i === 6} />)}
       {nodes.map((node, index) => (
-        <Float key={index} speed={1.1 + index * .08} floatIntensity={.12} rotationIntensity={.02}>
+        <Float key={index} speed={reducedMotion ? 0 : 1.1 + index * .08} floatIntensity={reducedMotion ? 0 : .12} rotationIntensity={reducedMotion ? 0 : .02}>
           <mesh position={node.p}>
             <sphereGeometry args={[node.scale, 24, 24]} />
             <meshStandardMaterial color={node.color} emissive={node.color} emissiveIntensity={.35} roughness={.4} />
@@ -275,11 +274,11 @@ function World({ reducedMotion }: { reducedMotion: boolean }) {
       <pointLight position={[-5, 2, 1]} intensity={14} color={cyan} />
       <pointLight position={[5, 1, -12]} intensity={11} color={coral} />
       <Stars radius={42} depth={28} count={reducedMotion ? 260 : 900} factor={2.2} saturation={0} fade speed={reducedMotion ? 0 : .22} />
-      <CoreModel />
-      <KnowledgeWorld />
-      <ConnectionWorld />
-      <AgentWorld />
-      <GraphWorld />
+      <CoreModel reducedMotion={reducedMotion} />
+      <KnowledgeWorld reducedMotion={reducedMotion} />
+      <ConnectionWorld reducedMotion={reducedMotion} />
+      <AgentWorld reducedMotion={reducedMotion} />
+      <GraphWorld reducedMotion={reducedMotion} />
     </>
   );
 }
@@ -327,12 +326,12 @@ export function ImmersiveAtlas() {
         <nav aria-label="Immersive Atlas navigation">
           <Link href="/paths">Paths</Link>
           <Link href="/learn/mcp">MCP</Link>
-          <a href="#concepts">Index</a>
+          <Link href="/learn/rag">RAG</Link>
         </nav>
       </div>
 
       <Canvas dpr={dpr} camera={{ position: [0, 1.5, 10], fov: compact ? 54 : 43 }} gl={{ antialias: !compact, powerPreference: "high-performance" }}>
-        <ScrollControls pages={5} damping={reducedMotion ? 0 : .18} distance={1}>
+        <ScrollControls pages={5} damping={reducedMotion ? .01 : .18} distance={1}>
           <CameraJourney reducedMotion={reducedMotion} />
           <World reducedMotion={reducedMotion} />
           <Scroll html style={{ width: "100%" }}>
@@ -341,7 +340,7 @@ export function ImmersiveAtlas() {
                 <section className={`immersiveChapter chapter-${index}`} key={section.eyebrow} id={index === sections.length - 1 ? "concepts" : undefined}>
                   <div className="immersiveCopy">
                     <span>{section.eyebrow}</span>
-                    <h1>{section.title}</h1>
+                    {index === 0 ? <h1>{section.title}</h1> : <h2>{section.title}</h2>}
                     <p>{section.body}</p>
                     <Link href={section.action.href}>{section.action.label}<b>↗</b></Link>
                   </div>
